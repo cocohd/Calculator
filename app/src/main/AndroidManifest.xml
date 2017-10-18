@@ -16,6 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".JinZhiActivity" />
+        <activity android:name=".ConvertActivity" />
+        <activity android:name=".FunctionActivity" />
+        <activity android:name=".Length_Convert" />
+        <activity android:name=".Area_Convert" />
+        <activity android:name=".Money_Convert" />
+        <activity android:name=".Container_Convert"></activity>
     </application>
 
 </manifest>

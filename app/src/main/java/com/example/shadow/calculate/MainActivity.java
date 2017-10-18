@@ -4,23 +4,67 @@ package com.example.shadow.calculate;
 import java.util.Arrays;
 
 import bsh.EvalError;
-import bsh.Interpreter;
-import android.os.Bundle;
+import bsh.Interpreter;     //java动态执行代码
+
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-
+//继承自AppCompatActivity,否则不会显示顶部菜单栏；
 public class MainActivity extends Activity implements OnClickListener{
 
     EditText rsText = null;  //显示器
     boolean isClear = false; //用于记录依稀
+    private DrawerLayout mDrawerLayout;
+    //item 菜单
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main,menu);
+        return true;
+    }
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
+        navView.setCheckedItem(R.id.cal_jinzhi);
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.cal_jinzhi:
+                        Intent intent=new Intent(MainActivity.this,JinZhiActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.cal_danwei:
+                        Intent intent1=new Intent(MainActivity.this,ConvertActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.cal_function:
+                        Intent intent2=new Intent(MainActivity.this,FunctionActivity.class);
+                        startActivity(intent2);
+                        break;
+                }
+                return true;
+            }
+        });
+
 
         //fun 功能按钮
         rsText = (EditText)findViewById(R.id.rsText);
@@ -156,7 +200,6 @@ public class MainActivity extends Activity implements OnClickListener{
         }
         return Arrays.toString(num).replaceAll("[\\[\\], ]", "");
     }
-
 
 
 
